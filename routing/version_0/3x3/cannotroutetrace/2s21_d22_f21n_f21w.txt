@@ -3,6 +3,4 @@ south to 20
 west to 10
 north to 11
 east to 21
-east two 31
-north to 32
 

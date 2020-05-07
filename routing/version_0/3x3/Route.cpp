@@ -119,14 +119,14 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
     }
 
     // go east if:
-    else if (cur_x != MAX_X + 1 && (traveling != "west") && node[cur_x][cur_y].east_ok && (dest_x > cur_x + 1 || (dest_x > cur_x && dest_y == cur_y + 1))) {
+    else if (cur_x != MAX_X && (traveling != "west") && node[cur_x][cur_y].east_ok && (dest_x > cur_x + 1 || (dest_x > cur_x && dest_y == cur_y + 1))) {
       cur_x++;
       traveling = "east";
       ss << traveling << " to " << cur_x << cur_y << endl;
     }
 
     // go north if:
-    else if (cur_y != MAX_Y + 1 && (traveling != "south") && node[cur_x][cur_y].north_ok && dest_y > cur_y) {
+    else if (cur_y != MAX_Y && (traveling != "south") && node[cur_x][cur_y].north_ok && dest_y > cur_y) {
       cur_y++;
       traveling = "north";
       ss << traveling << " to " << cur_x << cur_y << endl;
@@ -148,7 +148,7 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
     }
 
     //ELSE go east if
-    else if (cur_x != MAX_X + 1 && cur_x <= dest_x && (traveling != "west" || cur_x == dest_x || (cur_x + 1 == dest_x && cur_y + 1 != dest_y)) 
+    else if (cur_x != MAX_X && cur_x <= dest_x && (traveling != "west" || cur_x == dest_x || (cur_x + 1 == dest_x && cur_y + 1 != dest_y)) 
             && node[cur_x][cur_y].east_ok) {
       cur_x++;
       traveling = "east";
@@ -156,7 +156,7 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
     }
 
     //ELSE go north if
-    else if (cur_y != MAX_Y + 1 && cur_y <= dest_y && (traveling != "south" || cur_x <= dest_x) && node[cur_x][cur_y].north_ok) {
+    else if (cur_y != MAX_Y && cur_y <= dest_y && (traveling != "south" || cur_x <= dest_x) && node[cur_x][cur_y].north_ok) {
       cur_y++;
       traveling = "north";
       ss << traveling << " two " << cur_x << cur_y << endl;
@@ -167,7 +167,7 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
       unroutable = true;
       num_fault.new_nodeliver();
       ofstream noroute("_cannotroute.txt", ios::out | ios::app);
-      noroute << filename.str() << endl;
+      noroute << filename.str() << " (" << t << " moves)" << endl;
       ofstream noroutefile("cannotroutetrace/" + filename.str() + ".txt", ios::out | ios::app);
       noroutefile << "MODIFIED ROUTE: \n" << ss.str() << endl;
       break;
@@ -193,8 +193,8 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
     num_fault.new_delivered();
     ofstream deliv("_delivered.txt", ios::out | ios::app);
     deliv << filename.str() << " (" << t << " moves)" << endl;
-    // ofstream delivered("deliveredtrace/" + filename.str() + ".txt", ios::out | ios::app);
-    // delivered << "ORIGINAL ROUTE: \n" << compare << "\n\nMODIFIED ROUTE: \n" << ss.str() << endl;
+    ofstream delivered("deliveredtrace/" + filename.str() + ".txt", ios::out | ios::app);
+    delivered << "ORIGINAL ROUTE: \n" << ss.str() << endl;
   }
 
   // ofstream tested("_tested.txt", ios::out | ios::app);

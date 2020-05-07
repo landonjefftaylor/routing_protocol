@@ -168,7 +168,7 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
       unroutable = true;
       num_fault.new_nodeliver();
       ofstream noroute("_cannotroute.txt", ios::out | ios::app);
-      noroute << filename.str() << endl;
+      noroute << filename.str() << " (" << t << " moves)" << endl;
       ofstream noroutefile("cannotroutetrace/" + filename.str() + ".txt", ios::out | ios::app);
       noroutefile << "MODIFIED ROUTE: \n" << ss.str() << endl;
       break;

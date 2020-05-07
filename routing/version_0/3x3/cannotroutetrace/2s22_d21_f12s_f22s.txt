@@ -1,5 +1,4 @@
 MODIFIED ROUTE: 
 west to 12
 east two 22
-east two 32
 
