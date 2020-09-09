@@ -129,7 +129,7 @@ int route(int cur_x, int cur_y, int dest_x, int dest_y, int faulty_x1, int fault
     // go south if:
     else if (cur_y != 0 && (traveling == "west" || traveling == "south" || traveling == "new") && node[cur_x][cur_y].south_ok && 
               (cur_y >= dest_y || (cur_x <= dest_x && !node[cur_x][cur_y].west_ok)) && 
-              (dest_x != cur_x + 1 || dest_y < /*changed for v2*/ cur_y + 1)) {
+              (dest_x != cur_x + 1 || dest_y <= /*changed for v2*/ cur_y)) {
       cur_y--;
       traveling = "south";
       ss << traveling << " to " << cur_x << cur_y << endl;
